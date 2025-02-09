@@ -1,0 +1,440 @@
+:root {
+    --brass-dark: #6b <boltAction type="file" filePath="style.css">3d14;
+    --brass-light: #a3924e;
+    --brass-highlight: #edd050;
+    --brass-pale: #f0de9f;
+    --dark-wood: #1c0202;
+    --border-radius: 6px;
+    --lamp-off: #2c1810;
+    --lamp-on: #edd050;
+    --error-color: #ff4444;
+    --success-color: #44ff44;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background-color: var(--dark-wood);
+    color: var(--brass-pale);
+    line-height: 1.6;
+    min-height: 100vh;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 3rem;
+    border-bottom: 2px solid var(--brass-light);
+    padding-bottom: 2rem;
+}
+
+header h1 {
+    font-size: 2.5rem;
+    color: var(--brass-highlight);
+    margin-bottom: 0.5rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+header p {
+    color: var(--brass-pale);
+    font-size: 1.1rem;
+}
+
+.tutorial-toggle {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: var(--brass-dark);
+    color: var(--brass-pale);
+    padding: 0.5rem 1rem;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    border: 1px solid var(--brass-light);
+    z-index: 1000;
+    transition: all 0.3s ease;
+}
+
+.tutorial-toggle:hover {
+    background: var(--brass-light);
+    color: var(--dark-wood);
+}
+
+.tutorial {
+    position: fixed;
+    top: 0;
+    right: -400px;
+    width: 400px;
+    height: 100vh;
+    background: var(--dark-wood);
+    border-left: 2px solid var(--brass-light);
+    padding: 2rem;
+    overflow-y: auto;
+    transition: right 0.3s ease;
+    z-index: 999;
+    box-shadow: -5px 0 15px rgba(0, 0, 0, 0.3);
+}
+
+.tutorial.active {
+    right: 0;
+}
+
+.tutorial h2 {
+    color: var(--brass-highlight);
+    margin-bottom: 1rem;
+    border-bottom: 1px solid var(--brass-light);
+    padding-bottom: 0.5rem;
+}
+
+.tutorial-section {
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--brass-light);
+}
+
+.tutorial-section h3 {
+    color: var(--brass-light);
+    margin-bottom: 0.5rem;
+}
+
+.tutorial-section p {
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+}
+
+.tutorial-section ul {
+    list-style-position: inside;
+    margin-left: 1rem;
+    margin-bottom: 1rem;
+}
+
+.enigma-machine {
+    background: var(--brass-dark);
+    border-radius: var(--border-radius);
+    padding: 2rem;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+    border: 2px solid var(--brass-light);
+}
+
+.rotor-section {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    margin-bottom: 2rem;
+    padding: 1.5rem;
+    background: var(--dark-wood);
+    border-radius: var(--border-radius);
+    border: 1px solid var(--brass-light);
+}
+
+.rotor-config {
+    display: flex;
+    gap: 2rem;
+    justify-content: center;
+}
+
+.rotor {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    background: var(--brass-dark);
+    padding: 1rem;
+    border-radius: var(--border-radius);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    border: 1px solid var(--brass-light);
+    transition: transform 0.2s ease;
+}
+
+.rotor:hover {
+    transform: translateY(-2px);
+}
+
+.rotor label {
+    font-weight: 600;
+    color: var(--brass-pale);
+}
+
+.rotor-position {
+    display: grid;
+    grid-template-columns: auto 1fr auto 1fr;
+    gap: 0.5rem;
+    align-items: center;
+}
+
+.rotor-position input {
+    width: 40px;
+    text-align: center;
+    text-transform: uppercase;
+    background: var(--brass-pale);
+    color: var(--dark-wood);
+    font-family: monospace;
+    font-size: 1.1rem;
+}
+
+.reflector {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    align-items: center;
+}
+
+select, input, button {
+    padding: 0.5rem;
+    border: 1px solid var(--brass-light);
+    border-radius: var(--border-radius);
+    font-size: 1rem;
+    background: var(--brass-pale);
+    color: var(--dark-wood);
+    transition: all 0.2s ease;
+}
+
+select:focus, input:focus {
+    outline: none;
+    border-color: var(--brass-highlight);
+    box-shadow: 0 0 5px var(--brass-highlight);
+}
+
+.plugboard {
+    margin-bottom: 2rem;
+    padding: 1.5rem;
+    background: var(--dark-wood);
+    border-radius: var(--border-radius);
+    border: 1px solid var(--brass-light);
+}
+
+.plugboard h3 {
+    margin-bottom: 1rem;
+    color: var(--brass-highlight);
+}
+
+.plugboard input {
+    width: 100%;
+    padding: 0.75rem;
+    font-family: monospace;
+    font-size: 1.1rem;
+    letter-spacing: 1px;
+}
+
+.hint {
+    font-size: 0.875rem;
+    color: var(--brass-pale);
+    margin-top: 0.5rem;
+    font-style: italic;
+}
+
+.input-output {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+.text-section {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.text-section label {
+    color: var(--brass-highlight);
+    font-weight: 500;
+}
+
+textarea {
+    height: 150px;
+    padding: 1rem;
+    border: 1px solid var(--brass-light);
+    border-radius: var(--border-radius);
+    resize: vertical;
+    font-family: monospace;
+    font-size: 1rem;
+    background: var(--brass-pale);
+    color: var(--dark-wood);
+    transition: all 0.2s ease;
+}
+
+textarea:focus {
+    outline: none;
+    border-color: var(--brass-highlight);
+    box-shadow: 0 0 5px var(--brass-highlight);
+}
+
+.controls {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    justify-content: center;
+}
+
+button {
+    padding: 0.75rem 1.5rem;
+    background-color: var(--brass-light);
+    color: var(--dark-wood);
+    border: 1px solid var(--brass-highlight);
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.2s;
+    min-width: 120px;
+}
+
+button:hover {
+    background-color: var(--brass-highlight);
+    transform: translateY(-1px);
+}
+
+button:active {
+    transform: translateY(1px);
+}
+
+#reset-btn {
+    background-color: var(--brass-dark);
+    color: var(--brass-pale);
+}
+
+#reset-btn:hover {
+    background-color: var(--brass-light);
+    color: var(--dark-wood);
+}
+
+#copy-btn {
+    background-color: var(--brass-dark);
+    color: var(--brass-pale);
+}
+
+#copy-btn:hover {
+    background-color: var(--brass-light);
+    color: var(--dark-wood);
+}
+
+.lampboard {
+    background: var(--dark-wood);
+    padding: 2rem;
+    border-radius: var(--border-radius);
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    align-items: center;
+    border: 1px solid var(--brass-light);
+}
+
+.lamp-row {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.lamp {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: var(--lamp-off);
+    color: var(--brass-pale);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    transition: all 0.2s;
+    border: 1px solid var(--brass-light);
+    cursor: default;
+    user-select: none;
+}
+
+.lamp.active {
+    background-color: var(--lamp-on);
+    color: var(--dark-wood);
+    box-shadow: 0 0 15px var(--lamp-on);
+}
+
+.tagesschlussel {
+    background: var(--dark-wood);
+    padding: 1.5rem;
+    border-radius: var(--border-radius);
+    margin-bottom: 2rem;
+    border: 1px solid var(--brass-light);
+}
+
+.tagesschlussel h3 {
+    color: var(--brass-highlight);
+    margin-bottom: 1rem;
+}
+
+.tagesschlussel select {
+    width: 100%;
+    margin-bottom: 1rem;
+}
+
+.validation-message {
+    color: var(--error-color);
+    background: rgba(255, 68, 68, 0.1);
+    padding: 0.5rem 1rem;
+    border-radius: var(--border-radius);
+    margin-bottom: 1rem;
+    display: none;
+    border: 1px solid var(--error-color);
+}
+
+.validation-message.show {
+    display: block;
+}
+
+.success-message {
+    color: var(--success-color);
+    background: rgba(68, 255, 68, 0.1);
+    padding: 0.5rem 1rem;
+    border-radius: var(--border-radius);
+    margin-top: 0.5rem;
+    text-align: center;
+    border: 1px solid var(--success-color);
+}
+
+footer {
+    text-align: center;
+    margin-top: 3rem;
+    color: var(--brass-pale);
+    font-size: 0.9rem;
+    border-top: 2px solid var(--brass-light);
+    padding-top: 2rem;
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding: 1rem;
+    }
+
+    .rotor-config {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .input-output {
+        grid-template-columns: 1fr;
+    }
+
+    .controls {
+        flex-direction: column;
+    }
+
+    .lamp {
+        width: 30px;
+        height: 30px;
+        font-size: 0.875rem;
+    }
+
+    .tutorial {
+        width: 100%;
+        right: -100%;
+    }
+
+    .tutorial-toggle {
+        top: 10px;
+        right: 10px;
+    }
+}

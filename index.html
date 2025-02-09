@@ -1,0 +1,191 @@
+
+
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enigma M3 Simulator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <button class="tutorial-toggle" id="tutorial-toggle">Anleitung</button>
+    
+    <div class="tutorial" id="tutorial">
+        <h2>Enigma Bedienungsanleitung</h2>
+        
+        <div class="tutorial-section">
+            <h3>Schnellstart</h3>
+            <p>1. Walzen einsetzen (von links nach rechts)</p>
+            <p>2. Ringstellung konfigurieren (optional)</p>
+            <p>3. Grundstellung einstellen</p>
+            <p>4. Steckerbrett verbinden (optional)</p>
+            <p>5. Nachricht eingeben</p>
+        </div>
+
+        <div class="tutorial-section">
+            <h3>Walzeneinstellungen</h3>
+            <ul>
+                <li>Linke Walze: Langsamste Bewegung</li>
+                <li>Mittlere Walze: Bewegt sich bei Übertrag</li>
+                <li>Rechte Walze: Bewegt sich bei jedem Tastendruck</li>
+            </ul>
+            <p>Ringstellung (Ringstellung) beeinflusst die interne Verdrahtung.</p>
+            <p>Startposition (Grundstellung) setzt die Anfangsposition.</p>
+        </div>
+
+        <div class="tutorial-section">
+            <h3>Steckerbrett</h3>
+            <p>Buchstabenpaare werden vor und nach der Verschlüsselung vertauscht.</p>
+            <p>Format: "AB CD EF" (bis zu 10 Paare)</p>
+            <p>Jeder Buchstabe darf nur einmal verbunden werden.</p>
+        </div>
+    </div>
+
+    <div class="container">
+        <header>
+            <h1>Enigma M3 Simulator</h1>
+            <p>Deutsche Verschlüsselungsmaschine (1940-1945)</p>
+        </header>
+
+        <div class="enigma-machine">
+            <div class="tagesschlussel">
+                <h3>Tagesschlüssel (aktuell nicht funktionierend)</h3>
+                <select id="daily-key-select">
+                    <option value="">Tagesschlüssel auswählen...</option>
+                </select>
+                <button id="apply-daily-key">Anwenden</button>
+            </div>
+
+            <div class="validation-message" id="validation-message"></div>
+
+            <div class="rotor-section">
+                <div class="rotor-config">
+                    <div class="rotor">
+                        <label>Linke Walze (Langsam)</label>
+                        <select id="rotor1-type">
+                            <option value="I">I</option>
+                            <option value="II">II</option>
+                            <option value="III">III</option>
+                            <option value="IV">IV</option>
+                            <option value="V">V</option>
+                            <option value="VI">VI</option>
+                            <option value="VII">VII</option>
+                            <option value="VIII">VIII</option>
+                        </select>
+                        <div class="rotor-position">
+                            <label>Ring</label>
+                            <input type="text" id="rotor1-ring" maxlength="1" value="A">
+                            <label>Start</label>
+                            <input type="text" id="rotor1-start" maxlength="1" value="A">
+                        </div>
+                    </div>
+                    <div class="rotor">
+                        <label>Mittlere Walze</label>
+                        <select id="rotor2-type">
+                            <option value="I">I</option>
+                            <option value="II" selected>II</option>
+                            <option value="III">III</option>
+                            <option value="IV">IV</option>
+                            <option value="V">V</option>
+                        </select>
+                        <div class="rotor-position">
+                            <label>Ring</label>
+                            <input type="text" id="rotor2-ring" maxlength="1" value="A">
+                            <label>Start</label>
+                            <input type="text" id="rotor2-start" maxlength="1" value="A">
+                        </div>
+                    </div>
+                    <div class="rotor">
+                        <label>Rechte Walze (Schnell)</label>
+                        <select id="rotor3-type">
+                            <option value="I">I</option>
+                            <option value="II">II</option>
+                            <option value="III" selected>III</option>
+                            <option value="IV">IV</option>
+                            <option value="V">V</option>
+                        </select>
+                        <div class="rotor-position">
+                            <label>Ring</label>
+                            <input type="text" id="rotor3-ring" maxlength="1" value="A">
+                            <label>Start</label>
+                            <input type="text" id="rotor3-start" maxlength="1" value="A">
+                        </div>
+                    </div>
+                </div>
+                <div class="reflector">
+                    <label>Umkehrwalze</label>
+                    <select id="reflector-type">
+                        <option value="B">UKW-B</option>
+                        <option value="C">UKW-C</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="plugboard">
+                <h3>Steckerbrett</h3>
+                <input type="text" id="plugboard-pairs" placeholder="AE BF CM DQ HU JN LW PZ RX ST" maxlength="29">
+                <p class="hint">Bis zu 10 Buchstabenpaare (z.B., AE BF CM)</p>
+            </div>
+
+            <div class="input-output">
+                <div class="text-section">
+                    <label for="input-text">Eingabetext</label>
+                    <textarea id="input-text" placeholder="Text zum Verschlüsseln/Entschlüsseln eingeben..."></textarea>
+                </div>
+                <div class="text-section">
+                    <label for="output-text">Ausgabetext</label>
+                    <textarea id="output-text" readonly></textarea>
+                </div>
+            </div>
+
+            <div class="controls">
+                <button id="process-btn">Verarbeiten</button>
+                <button id="reset-btn">Zurücksetzen</button>
+                <button id="copy-btn">Kopieren</button>
+            </div>
+
+            <div class="lampboard">
+                <div class="lamp-row">
+                    <div class="lamp" data-letter="Q">Q</div>
+                    <div class="lamp" data-letter="W">W</div>
+                    <div class="lamp" data-letter="E">E</div>
+                    <div class="lamp" data-letter="R">R</div>
+                    <div class="lamp" data-letter="T">T</div>
+                    <div class="lamp" data-letter="Z">Z</div>
+                    <div class="lamp" data-letter="U">U</div>
+                    <div class="lamp" data-letter="I">I</div>
+                    <div class="lamp" data-letter="O">O</div>
+                </div>
+                <div class="lamp-row">
+                    <div class="lamp" data-letter="A">A</div>
+                    <div class="lamp" data-letter="S">S</div>
+                    <div class="lamp" data-letter="D">D</div>
+                    <div class="lamp" data-letter="F">F</div>
+                    <div class="lamp" data-letter="G">G</div>
+                    <div class="lamp" data-letter="H">H</div>
+                    <div class="lamp" data-letter="J">J</div>
+                    <div class="lamp" data-letter="K">K</div>
+                </div>
+                <div class="lamp-row">
+                    <div class="lamp" data-letter="P">P</div>
+                    <div class="lamp" data-letter="Y">Y</div>
+                    <div class="lamp" data-letter="X">X</div>
+                    <div class="lamp" data-letter="C">C</div>
+                    <div class="lamp" data-letter="V">V</div>
+                    <div class="lamp" data-letter="B">B</div>
+                    <div class="lamp" data-letter="N">N</div>
+                    <div class="lamp" data-letter="M">M</div>
+                    <div class="lamp" data-letter="L">L</div>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <p>Historische Notiz: Die Enigma-Maschine war ein komplexes Verschlüsselungsgerät der deutschen Streitkräfte im Zweiten Weltkrieg.</p>
+        </footer>
+    </div>
+    <script src="keys.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
